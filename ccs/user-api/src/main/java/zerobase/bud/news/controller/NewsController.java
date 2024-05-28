@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import zerobase.bud.news.dto.BookMarkDto;
 import zerobase.bud.news.dto.NewsDto;
 import zerobase.bud.news.dto.SearchAllNews;
+import zerobase.bud.news.service.BookMarkService;
 import zerobase.bud.news.service.NewsService;
 
 import javax.validation.Valid;
@@ -17,6 +17,8 @@ import javax.validation.Valid;
 @Slf4j
 public class NewsController {
     private final NewsService newsService;
+    private final BookMarkService bookMarkService;
+
 
     @GetMapping("/")
     public String home(){
@@ -39,4 +41,17 @@ public class NewsController {
 
         return ResponseEntity.ok(newsService.getNewsDetail(id));
     }
+
+    @GetMapping("/news/bookmark/{userId}")
+    public int getBookMark(@PathVariable Long userId){
+        return bookMarkService.getBookMark(userId);
+    }
+
+    @PostMapping("/news/bookmark")
+    public BookMarkDto saveBookMark(@RequestBody BookMarkDto bookMarkDto) {
+        return bookMarkService.saveBookMark(bookMarkDto);
+    }
+
+
+
 }

@@ -24,4 +24,15 @@ public class BookMarkDto {
                 .user_id(bookMark.getUser_id())
                 .build();
     }
+
+
+    public BookMark toEntity() {
+        return BookMark.builder()
+                .id(id)
+                .news_id(news_id)
+                .user_id(user_id)
+                .build();
+    }
+
+
 }

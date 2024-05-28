@@ -11,7 +11,9 @@ version '0.0.1-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-
+ext {
+    set('springCloudVersion', "2021.0.1")
+}
 dependencyManagement {
     imports {
         mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
@@ -38,8 +40,23 @@ dependencies {
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
     implementation "com.querydsl:querydsl-jpa:5.0.0"
     implementation "com.querydsl:querydsl-apt:5.0.0"
+
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+
+
+
     runtimeOnly 'com.mysql:mysql-connector-j'
 }
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+
 
 //querydsl 추가 시작
 def querydslDir = "$buildDir/generated/querydsl"
