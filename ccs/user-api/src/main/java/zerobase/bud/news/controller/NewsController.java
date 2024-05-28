@@ -30,7 +30,6 @@ public class NewsController {
     @GetMapping("/news")
     public ResponseEntity<Page<SearchAllNews.Response>> getNewsList(
             @Valid SearchAllNews.Request params) {
-        System.out.println("Params!!!!!"+params);
         log.debug("Received request with parameters: {}", params);
         return ResponseEntity.ok(newsService.getNewsList(params));
     }
