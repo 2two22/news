@@ -16,7 +16,7 @@ import static zerobase.bud.news.domain.QNews.news;
 public class BookMarkRepositoryQuerydslImpl implements BookMarkRepositoryQuerydsl {
     private final JPAQueryFactory jpaQueryFactory;
 
-    public int fetchCount(int user_id) {
+    public int fetchCount(long user_id) {
         return (int)jpaQueryFactory
                 .select(bookMark.count())
                 .from(bookMark)

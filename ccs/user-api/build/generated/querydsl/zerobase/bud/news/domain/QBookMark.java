@@ -31,7 +31,7 @@ public class QBookMark extends EntityPathBase<BookMark> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
-    public final NumberPath<Integer> user_id = createNumber("user_id", Integer.class);
+    public final NumberPath<Long> user_id = createNumber("user_id", Long.class);
 
     public QBookMark(String variable) {
         super(BookMark.class, forVariable(variable));

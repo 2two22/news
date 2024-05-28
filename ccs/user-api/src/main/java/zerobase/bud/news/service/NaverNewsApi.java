@@ -34,15 +34,15 @@ import static zerobase.bud.news.util.NewsConstants.*;
 @Service
 @RequiredArgsConstructor
 public class NaverNewsApi {
-    @Value("")
+    @Value("o8z_IOJK0Glh7lf45ja2")
     private String naverClientId;
-    @Value("")
+    @Value("GXrMzilwGC")
     private String naverClientSecret;
 
     private final NewsRepository newsRepository;
 
     @Transactional
-    @Scheduled(cron = "0 01 14 * * *")
+    @Scheduled(cron = "0 41 16 * * *")
     public void saveNaverNews() {
         for (String keyword : NAVER_NEWS_API_KEYWORDS) {
             for (String sort : NAVER_NEWS_API_SORT) {
