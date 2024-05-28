@@ -10,6 +10,7 @@ import zerobase.bud.news.dto.NewsDto;
 import zerobase.bud.news.dto.SearchAllNews;
 import zerobase.bud.news.service.BookMarkService;
 import zerobase.bud.news.service.NewsService;
+import zerobase.bud.news.util.JwtDecoder;
 
 import javax.validation.Valid;
 @RequiredArgsConstructor
@@ -46,9 +47,17 @@ public class NewsController {
         return bookMarkService.getBookMark(userId);
     }
 
-    @PostMapping("/news/bookmark")
-    public BookMarkDto saveBookMark(@RequestBody BookMarkDto bookMarkDto) {
-        return bookMarkService.saveBookMark(bookMarkDto);
+
+
+    @PostMapping("/users/bookmark")
+    public ResponseEntity<String> saveBookmark( @RequestParam("newsId") Long newsId,  @RequestHeader("Authorization") String jwtToken) {
+        // userId와 newsId를 사용하여 북마크를 저장하는 로직을 구현
+
+        JwtDecoder jwtDecoder = new JwtDecoder();
+        Long decodedUserId = jwtDecoder.decodeJwtAndGetUserId(jwtToken);
+        bookMarkService.saveBookMark(decodedUserId, newsId);
+
+        return ResponseEntity.ok("Bookmark saved successfully");
     }
 
 

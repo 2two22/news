@@ -14,7 +14,7 @@ public class BookMarkDto {
 
     private long id;
     private long news_id;
-    private int user_id;
+    private long user_id;
 
 
     public static BookMarkDto fromEntity(BookMark bookMark){

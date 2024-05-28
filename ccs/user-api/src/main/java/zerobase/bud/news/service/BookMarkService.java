@@ -10,6 +10,7 @@ import zerobase.bud.news.domain.BookMark;
 import zerobase.bud.news.dto.BookMarkDto;
 import zerobase.bud.news.repository.BookMarkRepository;
 import zerobase.bud.news.repository.BookMarkRepositoryQuerydslImpl;
+import zerobase.bud.news.util.JwtDecoder;
 
 @Service
 public class BookMarkService {
@@ -36,11 +37,16 @@ public class BookMarkService {
        return bookMarkRepositoryQuerydslImpl.fetchCount(user_id);
     }
 
+
     @Transactional
-    public BookMarkDto saveBookMark(BookMarkDto bookMarkDto) {
+    public BookMarkDto saveBookMark(Long userId, Long newsId) {
+
+        BookMarkDto bookMarkDto = BookMarkDto.builder()
+                .news_id(newsId)
+                .user_id(userId)
+                .build();
         BookMark bookMark = bookMarkDto.toEntity();
         bookMark = bookMarkRepository.save(bookMark);
         return BookMarkDto.fromEntity(bookMark);
     }
-
 }

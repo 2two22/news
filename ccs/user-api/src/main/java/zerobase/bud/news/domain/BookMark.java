@@ -26,7 +26,7 @@ public class BookMark extends BaseEntity {
 
     private long news_id;
 
-    private int user_id;
+    private long user_id;
 
 
 }
