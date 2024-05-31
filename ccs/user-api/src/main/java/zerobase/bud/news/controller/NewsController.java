@@ -13,6 +13,8 @@ import zerobase.bud.news.service.NewsService;
 import zerobase.bud.news.util.JwtDecoder;
 
 import javax.validation.Valid;
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @Slf4j
@@ -48,7 +50,6 @@ public class NewsController {
     }
 
 
-
     @PostMapping("/users/bookmark")
     public ResponseEntity<String> saveBookmark( @RequestParam("newsId") Long newsId,  @RequestHeader("Authorization") String jwtToken) {
         // userId와 newsId를 사용하여 북마크를 저장하는 로직을 구현
@@ -60,6 +61,11 @@ public class NewsController {
         return ResponseEntity.ok("Bookmark saved successfully");
     }
 
-
+    // 북마크된 뉴스 조회
+    @GetMapping("/news/bookmark/{userId}")
+    public ResponseEntity<List<NewsDto>> getBookmarkedNews(@PathVariable Long userId) {
+        List<NewsDto> bookmarks = bookMarkService.getBookmarkedNews(userId);
+        return ResponseEntity.ok(bookmarks);
+    }
 
 }

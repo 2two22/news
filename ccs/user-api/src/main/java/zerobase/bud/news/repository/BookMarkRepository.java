@@ -11,4 +11,7 @@ public interface BookMarkRepository extends JpaRepository<BookMark,Long> {
 
     @Override
     List<BookMark> findAll();
+
+    List<BookMark> findByUserId(Long userId);
+
 }
