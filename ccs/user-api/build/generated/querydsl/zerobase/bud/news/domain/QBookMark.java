@@ -31,12 +31,12 @@ public class QBookMark extends EntityPathBase<BookMark> {
 
     public final QNews news;
 
-    public final NumberPath<Long> news_id = createNumber("news_id", Long.class);
+    public final NumberPath<Long> newsId = createNumber("newsId", Long.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
-    public final NumberPath<Long> user_id = createNumber("user_id", Long.class);
+    public final NumberPath<Long> userId = createNumber("userId", Long.class);
 
     public QBookMark(String variable) {
         this(BookMark.class, forVariable(variable), INITS);

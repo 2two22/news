@@ -26,11 +26,13 @@ public class BookMarkService {
     private BookMarkRepositoryQuerydslImpl bookMarkRepositoryQuerydslImpl;
 
 
-    public int getCount(Long user_id){
-       return bookMarkRepositoryQuerydslImpl.fetchCount(user_id);
+    //public int getCount(Long user_id){return bookMarkRepositoryQuerydslImpl.fetchCount(user_id);}
+    public int getCount(Long userId){
+        return bookMarkRepositoryQuerydslImpl.fetchCount(userId);
     }
 
 
+    /*
     @Transactional
     public BookMarkDto saveBookMark(Long userId, Long newsId) {
 
@@ -41,7 +43,22 @@ public class BookMarkService {
         BookMark bookMark = bookMarkDto.toEntity();
         bookMark = bookMarkRepository.save(bookMark);
         return BookMarkDto.fromEntity(bookMark);
+    } */
+
+    @Transactional
+    public BookMarkDto saveBookMark(Long userId, Long newsId) {
+
+        BookMarkDto bookMarkDto = BookMarkDto.builder()
+                .newsId(newsId)
+                .userId(userId)
+                .build();
+        BookMark bookMark = bookMarkDto.toEntity();
+        bookMark = bookMarkRepository.save(bookMark);
+        return BookMarkDto.fromEntity(bookMark);
     }
+
+
+
 
     // 북마크 된 뉴스 가져오기
     public List<NewsDto> getBookmarkedNews(Long userId) {

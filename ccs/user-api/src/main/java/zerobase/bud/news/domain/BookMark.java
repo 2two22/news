@@ -21,9 +21,16 @@ public class BookMark extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    /*
     private long news_id;
 
-    private long user_id;
+    private long user_id; */
+
+    @Column(name = "news_id")
+    private Long newsId;
+
+    @Column(name = "user_id")
+    private Long userId;
 
     @ManyToOne
     @JoinColumn(name = "news_id", insertable = false, updatable = false)
