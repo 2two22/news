@@ -16,21 +16,23 @@ import java.util.stream.Collectors;
 @Service
 public class BookMarkService {
 
+    private BookMarkRepository bookMarkRepository;
+    private BookMarkRepositoryQuerydslImpl bookMarkRepositoryQuerydslImpl;
 
+    @Autowired
+    public BookMarkService(BookMarkRepository bookMarkRepository, BookMarkRepositoryQuerydslImpl bookMarkRepositoryQuerydslImpl) {
+        this.bookMarkRepository = bookMarkRepository;
+        this.bookMarkRepositoryQuerydslImpl = bookMarkRepositoryQuerydslImpl;
+    }
+
+    @Transactional
     public int getBookMark(Long userId) {
         return getCount(userId);
     }
 
-
-    private BookMarkRepository bookMarkRepository;
-    private BookMarkRepositoryQuerydslImpl bookMarkRepositoryQuerydslImpl;
-
-
+    @Transactional
+    public int getCount(Long userId){ return bookMarkRepositoryQuerydslImpl.fetchCount(userId);}
     //public int getCount(Long user_id){return bookMarkRepositoryQuerydslImpl.fetchCount(user_id);}
-    public int getCount(Long userId){
-        return bookMarkRepositoryQuerydslImpl.fetchCount(userId);
-    }
-
 
     /*
     @Transactional
@@ -56,8 +58,6 @@ public class BookMarkService {
         bookMark = bookMarkRepository.save(bookMark);
         return BookMarkDto.fromEntity(bookMark);
     }
-
-
 
 
     // 북마크 된 뉴스 가져오기

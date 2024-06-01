@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableFeignClients
-@SpringBootApplication(scanBasePackages = "zerobase.bud" )
+@SpringBootApplication(scanBasePackages = "zerobase.bud", exclude = SecurityAutoConfiguration.class)
 @EnableScheduling
 public class BudApplication {
 

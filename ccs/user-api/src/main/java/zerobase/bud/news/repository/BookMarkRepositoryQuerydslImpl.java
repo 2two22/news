@@ -23,11 +23,11 @@ public class BookMarkRepositoryQuerydslImpl implements BookMarkRepositoryQueryds
                 .where(bookMark.user_id.eq(user_id))
                 .fetchCount();
     } */
-    public int fetchCount(long user_id) {
+    public int fetchCount(long userId) {
         return (int)jpaQueryFactory
                 .select(bookMark.count())
                 .from(bookMark)
-                .where(bookMark.userId.eq(user_id))
+                .where(bookMark.userId.eq(userId))
                 .fetchCount();
     }
 
