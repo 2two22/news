@@ -61,11 +61,14 @@ public class NewsController {
         return ResponseEntity.ok("Bookmark saved successfully");
     }
 
-    // 북마크된 뉴스 조회
-    @GetMapping("/news/bookmark/{userId}")
-    public ResponseEntity<List<NewsDto>> getBookmarkedNews(@PathVariable Long userId) {
-        List<NewsDto> bookmarks = bookMarkService.getBookmarkedNews(userId);
+    // 유저가 북마크한 뉴스 조회
+    @GetMapping("/users/bookmark/list")
+    public ResponseEntity<List<NewsDto>> getBookmarkedNews(@RequestHeader("Authorization") String jwtToken) {
+        JwtDecoder jwtDecoder = new JwtDecoder();
+        Long decodedUserId = jwtDecoder.decodeJwtAndGetUserId(jwtToken);
+        List<NewsDto> bookmarks = bookMarkService.getBookmarkedNews(decodedUserId);
         return ResponseEntity.ok(bookmarks);
     }
+
 
 }
