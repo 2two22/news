@@ -11,6 +11,7 @@ import zerobase.bud.news.repository.BookMarkRepository;
 import zerobase.bud.news.repository.BookMarkRepositoryQuerydslImpl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,11 +50,15 @@ public class BookMarkService {
 
     @Transactional
     public BookMarkDto saveBookMark(Long userId, Long newsId) {
-
         BookMarkDto bookMarkDto = BookMarkDto.builder()
                 .newsId(newsId)
                 .userId(userId)
                 .build();
+        Optional<BookMark> optionalBookMark = bookMarkRepository.findByNewsIdAndUserId(newsId, userId);
+        if(optionalBookMark.isPresent()){
+            bookMarkRepository.delete(optionalBookMark.get());
+            return bookMarkDto;
+        }
         BookMark bookMark = bookMarkDto.toEntity();
         bookMark = bookMarkRepository.save(bookMark);
         return BookMarkDto.fromEntity(bookMark);

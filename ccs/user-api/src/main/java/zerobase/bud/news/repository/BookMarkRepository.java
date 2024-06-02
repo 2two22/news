@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import zerobase.bud.news.domain.BookMark;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BookMarkRepository extends JpaRepository<BookMark,Long> {
@@ -14,5 +15,7 @@ public interface BookMarkRepository extends JpaRepository<BookMark,Long> {
     List<BookMark> findAll();
 
     List<BookMark> findByUserId(Long userId);
+
+    Optional<BookMark> findByNewsIdAndUserId(Long newsId, Long userId);
 
 }
