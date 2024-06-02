@@ -13,15 +13,24 @@ import java.awt.print.Book;
 public class BookMarkDto {
 
     private long id;
-    private long news_id;
-    private long user_id;
+    //private long news_id;
+    //private long user_id;
+    private long newsId;
+    private long userId;
 
-
+    /*
     public static BookMarkDto fromEntity(BookMark bookMark){
         return BookMarkDto.builder()
                 .id(bookMark.getId())
                 .news_id(bookMark.getNews_id())
                 .user_id(bookMark.getUser_id())
+                .build();
+    } */
+    public static BookMarkDto fromEntity(BookMark bookMark){
+        return BookMarkDto.builder()
+                .id(bookMark.getId())
+                .newsId(bookMark.getNewsId())
+                .userId(bookMark.getUserId())
                 .build();
     }
 
@@ -29,8 +38,8 @@ public class BookMarkDto {
     public BookMark toEntity() {
         return BookMark.builder()
                 .id(id)
-                .news_id(news_id)
-                .user_id(user_id)
+                .newsId(newsId)
+                .userId(userId)
                 .build();
     }
 

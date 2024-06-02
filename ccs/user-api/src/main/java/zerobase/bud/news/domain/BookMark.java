@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -24,9 +21,24 @@ public class BookMark extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    /*
     private long news_id;
 
-    private long user_id;
+    private long user_id; */
 
+    @Column(name = "news_id")
+    private Long newsId;
+
+    @Column(name = "user_id")
+    private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "news_id", insertable = false, updatable = false)
+    private News news;
+
+
+    public News getNews() {
+        return news;
+    }
 
 }
