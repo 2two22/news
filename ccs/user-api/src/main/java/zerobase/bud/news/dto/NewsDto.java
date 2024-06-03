@@ -23,8 +23,9 @@ public class NewsDto {
     private String journalistNames;
     private String keywords;
     private long hitCount;
+    private boolean bookmarked;
 
-    public static NewsDto fromEntity(News news) {
+    public static NewsDto fromEntity(News news, boolean isBookmarked) {
         return NewsDto.builder()
                 .id(news.getId())
                 .registeredAt(news.getRegisteredAt())
@@ -38,6 +39,7 @@ public class NewsDto {
                 .journalistNames(news.getJournalistNames())
                 .keywords(news.getKeywords())
                 .hitCount(news.getHitCount())
+                .bookmarked(isBookmarked)
                 .build();
     }
 }
