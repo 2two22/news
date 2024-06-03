@@ -1,12 +1,18 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.7.10' apply false
+   /* id 'org.springframework.boot' version '2.7.10' apply false
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+    */
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group 'zerobase.bud'
 version '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
@@ -51,8 +57,9 @@ dependencies {
 
 
 
+    implementation 'mysql:mysql-connector-java:8.0.32' // MySQL Connector 추가
 
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    //runtimeOnly 'com.mysql:mysql-connector-j'
 }
 
 dependencyManagement {
@@ -80,14 +87,3 @@ compileQuerydsl {
 }
 
 
-
-tasks.jar {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-
-    manifest {
-        attributes 'Main-Class': 'zerobase.bud.BudApplication'
-    }
-    from(configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }) {
-        exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
-    }
-}
