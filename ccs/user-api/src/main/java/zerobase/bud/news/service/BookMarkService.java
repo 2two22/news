@@ -53,8 +53,9 @@ public class BookMarkService {
     public BookMarkDto saveBookMark(Long userId, Long newsId) {
         Optional<BookMark> optionalBookMark = bookMarkRepository.findByNewsIdAndUserId(newsId, userId);
         if(optionalBookMark.isPresent()){
-            // 이미 북마크 한 뉴스라면 DB에 새로 추가하지 않고 무시
-            return null;
+            // 이미 북마크 한 뉴스라면 삭제 -> 더블 클릭시 삭제되게 구현하기 위함
+            bookMarkRepository.delete(optionalBookMark.get());
+            return BookMarkDto.fromEntity(optionalBookMark.get());
         }
 
         BookMarkDto bookMarkDto = BookMarkDto.builder()
