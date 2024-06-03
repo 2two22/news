@@ -40,9 +40,9 @@ public class NewsController {
 
     @GetMapping("/news/detail/{newsId}")
     public ResponseEntity<NewsDto> getNewsDetail(
-            @PathVariable("newsId") long id) {
+            @PathVariable("newsId") long id, @RequestHeader("Authorization") String jwtToken) {
 
-        return ResponseEntity.ok(newsService.getNewsDetail(id));
+        return ResponseEntity.ok(newsService.getNewsDetail(id, jwtToken));
     }
 
     @PostMapping("/users/bookmark")
