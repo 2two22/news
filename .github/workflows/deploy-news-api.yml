@@ -37,3 +37,14 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_ID }}/news:latest
           build-args: |
             DB_URL=${{ secrets.DB_ENDPOINT }}
+
+      - name: deploy image
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_DEPLOYER }}
+          username: ${{ secrets.HOST_DEPLOYER_USERNAME }}
+          key: ${{ secrets.SSH_DEPLOYER }}
+          port: 22
+          script: |
+            kubectl set image deployment/news-deployment news=${{ secrets.DOCKERHUB_ID }}/news:latest
+            kubectl rollout restart deployment/news-deployment
