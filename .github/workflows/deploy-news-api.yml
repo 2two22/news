@@ -34,7 +34,8 @@ jobs:
           context: .
           file: ./ccs/news-api/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_ID }}/news:latest
+          repository: ${{ secrets.DOCKERHUB_ID }}/news
+          tags: ${{ github.sha }}, latest
           build-args: |
             DB_URL=${{ secrets.DB_ENDPOINT }}
 
@@ -46,5 +47,5 @@ jobs:
           key: ${{ secrets.SSH_DEPLOYER }}
           port: 22
           script: |
-            kubectl set image deployment/news-deployment news=${{ secrets.DOCKERHUB_ID }}/news:latest
+            kubectl set image deployment/news-deployment news=${{ secrets.DOCKERHUB_ID }}/news:${{ github.sha }}
             kubectl rollout restart deployment/news-deployment
